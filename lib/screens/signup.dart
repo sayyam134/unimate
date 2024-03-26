@@ -14,8 +14,9 @@ class _SignupState extends State<Signup> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SizedBox(
-          width: MediaQuery.of(context).size.width,
+          body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -23,11 +24,13 @@ class _SignupState extends State<Signup> {
               const Text(
                 "Sign Up",
                 style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromRGBO(138, 94, 65, 1)
-                ),),
-              const SizedBox(height: 30,),
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(138, 94, 65, 1)),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
               SizedBox(
                 width: 341,
                 child: Column(
@@ -36,23 +39,20 @@ class _SignupState extends State<Signup> {
                       decoration: InputDecoration(
                         hintText: "Full Name",
                         hintStyle: const TextStyle(
-                          fontSize: 24,
-                          color: Color.fromRGBO(163, 136, 119, 1)
-                        ),
+                            fontSize: 24,
+                            color: Color.fromRGBO(163, 136, 119, 1)),
                         filled: true,
                         fillColor: const Color.fromRGBO(254, 253, 253, 1),
-                        focusedBorder:OutlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: const BorderSide(
                                 width: 2.0,
-                                color: Color.fromRGBO(138, 94, 65, 1)
-                            )),
+                                color: Color.fromRGBO(138, 94, 65, 1))),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: const BorderSide(
                                 width: 2.0,
-                                color: Color.fromRGBO(138, 94, 65, 1)
-                            )),
+                                color: Color.fromRGBO(138, 94, 65, 1))),
                       ),
                       cursorColor: const Color.fromRGBO(138, 94, 65, 1),
                       textAlign: TextAlign.center,
@@ -63,22 +63,19 @@ class _SignupState extends State<Signup> {
                         hintText: "Contact",
                         hintStyle: const TextStyle(
                             fontSize: 24,
-                            color: Color.fromRGBO(163, 136, 119, 1)
-                        ),
+                            color: Color.fromRGBO(163, 136, 119, 1)),
                         filled: true,
                         fillColor: const Color.fromRGBO(254, 253, 253, 1),
-                        focusedBorder:OutlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: const BorderSide(
                                 width: 2.0,
-                                color: Color.fromRGBO(138, 94, 65, 1)
-                            )),
+                                color: Color.fromRGBO(138, 94, 65, 1))),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: const BorderSide(
                                 width: 2.0,
-                                color: Color.fromRGBO(138, 94, 65, 1)
-                            )),
+                                color: Color.fromRGBO(138, 94, 65, 1))),
                       ),
                       cursorColor: const Color.fromRGBO(138, 94, 65, 1),
                       textAlign: TextAlign.center,
@@ -89,22 +86,19 @@ class _SignupState extends State<Signup> {
                         hintText: "College",
                         hintStyle: const TextStyle(
                             fontSize: 24,
-                            color: Color.fromRGBO(163, 136, 119, 1)
-                        ),
+                            color: Color.fromRGBO(163, 136, 119, 1)),
                         filled: true,
                         fillColor: const Color.fromRGBO(254, 253, 253, 1),
-                        focusedBorder:OutlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: const BorderSide(
                                 width: 2.0,
-                                color: Color.fromRGBO(138, 94, 65, 1)
-                            )),
+                                color: Color.fromRGBO(138, 94, 65, 1))),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: const BorderSide(
                                 width: 2.0,
-                                color: Color.fromRGBO(138, 94, 65, 1)
-                            )),
+                                color: Color.fromRGBO(138, 94, 65, 1))),
                       ),
                       cursorColor: const Color.fromRGBO(138, 94, 65, 1),
                       textAlign: TextAlign.center,
@@ -115,22 +109,19 @@ class _SignupState extends State<Signup> {
                         hintText: "Department",
                         hintStyle: const TextStyle(
                             fontSize: 24,
-                            color: Color.fromRGBO(163, 136, 119, 1)
-                        ),
+                            color: Color.fromRGBO(163, 136, 119, 1)),
                         filled: true,
                         fillColor: const Color.fromRGBO(254, 253, 253, 1),
-                        focusedBorder:OutlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: const BorderSide(
                                 width: 2.0,
-                                color: Color.fromRGBO(138, 94, 65, 1)
-                            )),
+                                color: Color.fromRGBO(138, 94, 65, 1))),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: const BorderSide(
                                 width: 2.0,
-                                color: Color.fromRGBO(138, 94, 65, 1)
-                            )),
+                                color: Color.fromRGBO(138, 94, 65, 1))),
                       ),
                       cursorColor: const Color.fromRGBO(138, 94, 65, 1),
                       textAlign: TextAlign.center,
@@ -141,22 +132,19 @@ class _SignupState extends State<Signup> {
                         hintText: "Enrolment",
                         hintStyle: const TextStyle(
                             fontSize: 24,
-                            color: Color.fromRGBO(163, 136, 119, 1)
-                        ),
+                            color: Color.fromRGBO(163, 136, 119, 1)),
                         filled: true,
                         fillColor: const Color.fromRGBO(254, 253, 253, 1),
-                        focusedBorder:OutlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: const BorderSide(
                                 width: 2.0,
-                                color: Color.fromRGBO(138, 94, 65, 1)
-                            )),
+                                color: Color.fromRGBO(138, 94, 65, 1))),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: const BorderSide(
                                 width: 2.0,
-                                color: Color.fromRGBO(138, 94, 65, 1)
-                            )),
+                                color: Color.fromRGBO(138, 94, 65, 1))),
                       ),
                       cursorColor: const Color.fromRGBO(138, 94, 65, 1),
                       textAlign: TextAlign.center,
@@ -166,18 +154,20 @@ class _SignupState extends State<Signup> {
                       width: 170,
                       height: 66,
                       child: ElevatedButton(
-                          onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const Homepage()));
-                          },
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Homepage()));
+                        },
                         style: ElevatedButton.styleFrom(
                           textStyle: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold
-                          ),
-                          foregroundColor: const Color.fromRGBO(254, 253, 253, 1),
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                          foregroundColor:
+                              const Color.fromRGBO(254, 253, 253, 1),
                           backgroundColor: const Color.fromRGBO(138, 94, 65, 1),
                         ),
-                          child:const Text("Continue"),
+                        child: const Text("Continue"),
                       ),
                     )
                   ],
@@ -185,8 +175,8 @@ class _SignupState extends State<Signup> {
               )
             ],
           ),
-        )
-      ),
+        ),
+      )),
     );
   }
 }

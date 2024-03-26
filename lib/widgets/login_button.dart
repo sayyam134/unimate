@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:unimate/screens/signup.dart';
+import 'package:unimate/resources/authentication.dart';
+import 'package:unimate/screens/home_screen.dart';
 
-class LoginButton extends StatelessWidget {
+class LoginButton extends StatefulWidget {
   const LoginButton({super.key});
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _LoginButtonScreen();
+  }
+}
+
+class _LoginButtonScreen extends State<LoginButton> {
+  void signIn() async {
+    final res = await signInWithGoogle(context);
+    if (res) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => HomeScreen()));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>Signup()));
-      },
+      onTap: signIn,
+      splashColor: Color.fromRGBO(144, 101, 71, 0.5),
       child: Container(
         width: 230,
         height: 50,

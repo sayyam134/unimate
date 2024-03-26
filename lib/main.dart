@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:unimate/screens/login_screen.dart';
+import 'package:unimate/screens/signup.dart';
 import 'firebase_options.dart';
 
 // ...
