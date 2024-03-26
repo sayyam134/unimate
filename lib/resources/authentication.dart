@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:unimate/screens/login_screen.dart';
 import 'package:unimate/screens/signup.dart';
 
 final _firestore = FirebaseFirestore.instance;
@@ -26,10 +27,11 @@ Future<bool> signInWithGoogle(BuildContext context) async {
 
     if (user != null) {
       if (userCredentials.additionalUserInfo!.isNewUser) {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => Signup()));
+        _firestore.collection('users').doc(user.uid);
+        res = true;
+      } else {
+        res = false;
       }
-      res = true;
     }
   } on FirebaseAuthException catch (error) {
     res = false;
@@ -41,4 +43,11 @@ Future<bool> signInWithGoogle(BuildContext context) async {
     );
   }
   return res;
+}
+
+Future<void> logOut(BuildContext context) async {
+  await FirebaseAuth.instance.signOut();
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => LoginScreen()));
+  return;
 }

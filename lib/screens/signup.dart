@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:unimate/screens/homepage.dart';
+import 'package:unimate/screens/home_screen.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});

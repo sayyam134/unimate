@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:unimate/resources/authentication.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class Homepage extends StatefulWidget {
+  const Homepage({super.key});
+
   @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return _HomeScreenState();
-  }
+  State<Homepage> createState() => _HomepageState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return const Center(
-      child: const Text('Home Screen'),
-    );
+    return SafeArea(
+        child: Scaffold(
+            body: Center(
+      child: InkWell(
+          onTap: () {
+            logOut(context);
+          },
+          child: Text("Go Back")),
+    )));
   }
 }

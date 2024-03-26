@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:unimate/resources/authentication.dart';
 import 'package:unimate/screens/home_screen.dart';
+import 'package:unimate/screens/signup.dart';
 
 class LoginButton extends StatefulWidget {
   const LoginButton({super.key});
   @override
-  State<StatefulWidget> createState() {
+  State<LoginButton> createState() {
     // TODO: implement createState
     return _LoginButtonScreen();
   }
@@ -16,7 +17,10 @@ class _LoginButtonScreen extends State<LoginButton> {
     final res = await signInWithGoogle(context);
     if (res) {
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => HomeScreen()));
+          .push(MaterialPageRoute(builder: (context) => Signup()));
+    } else {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => Homepage()));
     }
   }
 

@@ -4,7 +4,7 @@ import 'package:unimate/widgets/login_button.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
   @override
-  State<StatefulWidget> createState() {
+  State<LoginScreen> createState() {
     // TODO: implement createState
     return _LoginScreenState();
   }
