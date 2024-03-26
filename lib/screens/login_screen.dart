@@ -9,11 +9,11 @@ class LoginScreen extends StatelessWidget {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        child: Column(
+        child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
+            Text(
               'Unimate',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -22,19 +22,15 @@ class LoginScreen extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            const SizedBox(
+            SizedBox(
               height: 50,
             ),
-            Container(
-              height: 200,
-              width: 200,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                color: Colors.grey,
-              ),
+            CircleAvatar(
+              radius: 100,
+              foregroundImage: AssetImage('assests/images/mainscreen_logo.jpg'),
             ),
-            const SizedBox(
-              height: 50,
+            SizedBox(
+              height: 60,
             ),
             LoginButton(),
           ],
