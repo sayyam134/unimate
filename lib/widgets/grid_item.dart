@@ -12,16 +12,17 @@ class GridItem extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
+            color: Colors.white,
             borderRadius: BorderRadius.circular(16),
             border:
                 Border.all(color: Color.fromRGBO(139, 94, 65, 1), width: 3)),
         child: const Center(
           child: Text(
-            '1st Year',
+            'Computer Networks',
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: Color.fromRGBO(163, 136, 119, 1),
-                fontSize: 24,
+                fontSize: 26,
                 fontWeight: FontWeight.bold),
           ),
         ),
