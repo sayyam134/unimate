@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unimate/resources/authentication.dart';
+import 'package:unimate/widgets/grid_item.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -49,12 +50,23 @@ class _HomepageState extends State<Homepage> {
             )
           ],
         ),
-        body: Center(
-          child: InkWell(
-              onTap: () {
-                logOut(context);
-              },
-              child: const Text("Go Back")),
+        body: GridView(
+          padding: const EdgeInsets.all(24),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 20,
+            childAspectRatio: 0.97,
+            mainAxisSpacing: 20,
+          ),
+          children: [
+            GridItem(),
+            GridItem(),
+            GridItem(),
+            GridItem(),
+            GridItem(),
+            GridItem(),
+            GridItem(),
+          ],
         ),
         bottomNavigationBar: BottomNavigationBar(
           onTap: (index) {

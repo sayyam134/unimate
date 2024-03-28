@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:unimate/screens/home_screen.dart';
 import 'package:unimate/screens/login_screen.dart';
 import 'package:unimate/screens/signup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
 
 // ...
-
+final _auth = FirebaseAuth.instance;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -28,7 +30,20 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         scaffoldBackgroundColor: const Color.fromRGBO(245, 237, 232, 1),
       ),
-      home: const LoginScreen(),
+      home: StreamBuilder(
+        stream: _auth.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasData) {
+            return const Homepage();
+          } else {
+            return const LoginScreen();
+          }
+        },
+      ),
     );
   }
 }
