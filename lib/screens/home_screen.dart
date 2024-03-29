@@ -58,7 +58,7 @@ class _HomepageState extends State<Homepage> {
             childAspectRatio: 0.97,
             mainAxisSpacing: 20,
           ),
-          children: [
+          children: const [
             GridItem(),
             GridItem(),
             GridItem(),

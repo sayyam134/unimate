@@ -17,10 +17,10 @@ class _LoginButtonScreen extends State<LoginButton> {
     final res = await signInWithGoogle(context);
     if (res) {
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => Signup()));
+          .push(MaterialPageRoute(builder: (context) => const Signup()));
     } else {
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => Homepage()));
+          .push(MaterialPageRoute(builder: (context) => const Homepage()));
     }
   }
 
