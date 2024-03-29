@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:unimate/resources/authentication.dart';
-import 'package:unimate/screens/subject_screen.dart';
-import 'package:unimate/widgets/grid_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:unimate/screens/note_screen.dart';
+
+import '../widgets/grid_item.dart';
 
 final _firestore = FirebaseFirestore.instance;
 
-class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+class UnitScreen extends StatefulWidget {
+  const UnitScreen({super.key, required this.yearId, required this.subjectId});
+  final String yearId;
+  final String subjectId;
 
   @override
-  State<Homepage> createState() => _HomepageState();
+  State<UnitScreen> createState() {
+    // TODO: implement createState
+    return _UnitScreenState();
+  }
 }
 
-class _HomepageState extends State<Homepage> {
-  var _currentindex = 0;
-  void _onSelectTab(index) {
-    setState(() {
-      _currentindex = index;
-    });
-  }
-
-  var yearList = [];
-  Future<void> _getYears() async {
+class _UnitScreenState extends State<UnitScreen> {
+  var unitList = [];
+  Future<void> getUnits() async {
     try {
       final userId = await FirebaseAuth.instance.currentUser!.uid;
       var response = await _firestore.collection('users').doc(userId).get();
@@ -34,28 +32,37 @@ class _HomepageState extends State<Homepage> {
           .collection('department')
           .doc(user['departmentId'])
           .collection('year')
+          .doc(widget.yearId)
+          .collection('subject')
+          .doc(widget.subjectId)
+          .collection('unit')
           .get();
-      yearList = data.docs.map((e) => e.data()).toList();
+      unitList = data.docs.map((e) => e.data()).toList();
     } on FirebaseException catch (e) {
       print(e);
     }
     return;
   }
 
-  void onTapped(String year) {
-    final yeardata =
-        yearList.where((element) => element['name'] == year).toList();
+  void onTapped(String unit) {
+    final unitData =
+        unitList.where((element) => element['name'] == unit).toList();
+    print(unitData[0]['id']);
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => SubjectScreen(yearId: yeardata[0]['id']),
+        builder: (context) => NoteScreen(
+            yearId: widget.yearId,
+            subjectId: widget.subjectId,
+            unitId: unitData[0]['id']),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return FutureBuilder(
-      future: _getYears(),
+      future: getUnits(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
@@ -101,38 +108,13 @@ class _HomepageState extends State<Homepage> {
                   childAspectRatio: 0.97,
                   mainAxisSpacing: 20,
                 ),
-                itemCount: yearList.length,
+                itemCount: unitList.length,
                 itemBuilder: (context, index) {
                   return GridItem(
-                    title: yearList[index]['name'],
+                    title: unitList[index]['name'],
                     onTapped: onTapped,
                   );
                 },
-              ),
-              bottomNavigationBar: BottomNavigationBar(
-                onTap: (index) {
-                  _onSelectTab(index);
-                },
-                currentIndex: _currentindex,
-                selectedFontSize: 16,
-                selectedIconTheme: const IconThemeData(
-                  size: 28,
-                ),
-                backgroundColor: const Color.fromRGBO(138, 94, 65, 1),
-                selectedItemColor: Colors.white,
-                unselectedItemColor: Colors.white54,
-                items: const [
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.library_books_rounded),
-                    label: 'NOTES',
-                    backgroundColor: Color.fromRGBO(138, 94, 65, 1),
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.groups_outlined),
-                    label: 'COMMUNITY',
-                    backgroundColor: Color.fromRGBO(161, 125, 100, 1),
-                  ),
-                ],
               ),
             ),
           );

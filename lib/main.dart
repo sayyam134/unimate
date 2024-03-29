@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasData) {
-            return const Signup();
+            return const Homepage();
           } else {
             return const LoginScreen();
           }

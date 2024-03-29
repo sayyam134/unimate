@@ -1,29 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:unimate/resources/authentication.dart';
-import 'package:unimate/screens/subject_screen.dart';
-import 'package:unimate/widgets/grid_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:unimate/screens/unit_screen.dart';
+import '../widgets/grid_item.dart';
 
 final _firestore = FirebaseFirestore.instance;
 
-class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+class SubjectScreen extends StatefulWidget {
+  const SubjectScreen({super.key, required this.yearId});
+  final String yearId;
 
   @override
-  State<Homepage> createState() => _HomepageState();
+  State<SubjectScreen> createState() {
+    return _SubjectScreenState();
+  }
 }
 
-class _HomepageState extends State<Homepage> {
-  var _currentindex = 0;
-  void _onSelectTab(index) {
-    setState(() {
-      _currentindex = index;
-    });
-  }
-
-  var yearList = [];
-  Future<void> _getYears() async {
+class _SubjectScreenState extends State<SubjectScreen> {
+  var subjectList = [];
+  Future<void> getSubjects() async {
     try {
       final userId = await FirebaseAuth.instance.currentUser!.uid;
       var response = await _firestore.collection('users').doc(userId).get();
@@ -34,28 +29,32 @@ class _HomepageState extends State<Homepage> {
           .collection('department')
           .doc(user['departmentId'])
           .collection('year')
+          .doc(widget.yearId)
+          .collection('subject')
           .get();
-      yearList = data.docs.map((e) => e.data()).toList();
+      subjectList = data.docs.map((e) => e.data()).toList();
     } on FirebaseException catch (e) {
       print(e);
     }
     return;
   }
 
-  void onTapped(String year) {
-    final yeardata =
-        yearList.where((element) => element['name'] == year).toList();
+  void onTapped(String subject) {
+    final subjectData =
+        subjectList.where((element) => element['name'] == subject).toList();
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => SubjectScreen(yearId: yeardata[0]['id']),
+        builder: (context) =>
+            UnitScreen(yearId: widget.yearId, subjectId: subjectData[0]['id']),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return FutureBuilder(
-      future: _getYears(),
+      future: getSubjects(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
@@ -101,38 +100,13 @@ class _HomepageState extends State<Homepage> {
                   childAspectRatio: 0.97,
                   mainAxisSpacing: 20,
                 ),
-                itemCount: yearList.length,
+                itemCount: subjectList.length,
                 itemBuilder: (context, index) {
                   return GridItem(
-                    title: yearList[index]['name'],
+                    title: subjectList[index]['name'],
                     onTapped: onTapped,
                   );
                 },
-              ),
-              bottomNavigationBar: BottomNavigationBar(
-                onTap: (index) {
-                  _onSelectTab(index);
-                },
-                currentIndex: _currentindex,
-                selectedFontSize: 16,
-                selectedIconTheme: const IconThemeData(
-                  size: 28,
-                ),
-                backgroundColor: const Color.fromRGBO(138, 94, 65, 1),
-                selectedItemColor: Colors.white,
-                unselectedItemColor: Colors.white54,
-                items: const [
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.library_books_rounded),
-                    label: 'NOTES',
-                    backgroundColor: Color.fromRGBO(138, 94, 65, 1),
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.groups_outlined),
-                    label: 'COMMUNITY',
-                    backgroundColor: Color.fromRGBO(161, 125, 100, 1),
-                  ),
-                ],
               ),
             ),
           );

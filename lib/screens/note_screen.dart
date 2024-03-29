@@ -1,29 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:unimate/resources/authentication.dart';
-import 'package:unimate/screens/subject_screen.dart';
-import 'package:unimate/widgets/grid_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:unimate/screens/pdf_viewer_screen.dart';
+
+import '../widgets/grid_item.dart';
 
 final _firestore = FirebaseFirestore.instance;
 
-class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+class NoteScreen extends StatefulWidget {
+  const NoteScreen(
+      {super.key,
+      required this.yearId,
+      required this.subjectId,
+      required this.unitId});
+  final String yearId;
+  final String subjectId;
+  final String unitId;
 
   @override
-  State<Homepage> createState() => _HomepageState();
+  State<NoteScreen> createState() {
+    // TODO: implement createState
+    return _NoteScreenState();
+  }
 }
 
-class _HomepageState extends State<Homepage> {
-  var _currentindex = 0;
-  void _onSelectTab(index) {
-    setState(() {
-      _currentindex = index;
-    });
-  }
-
-  var yearList = [];
-  Future<void> _getYears() async {
+class _NoteScreenState extends State<NoteScreen> {
+  var noteList = [];
+  var imageurl;
+  Future<void> getNotes() async {
     try {
       final userId = await FirebaseAuth.instance.currentUser!.uid;
       var response = await _firestore.collection('users').doc(userId).get();
@@ -34,28 +38,34 @@ class _HomepageState extends State<Homepage> {
           .collection('department')
           .doc(user['departmentId'])
           .collection('year')
+          .doc(widget.yearId)
+          .collection('subject')
+          .doc(widget.subjectId)
+          .collection('unit')
+          .doc(widget.unitId)
+          .collection('note')
           .get();
-      yearList = data.docs.map((e) => e.data()).toList();
+      noteList = data.docs.map((e) => e.data()).toList();
+      final imageData = await _firestore.collection('pdfimage').get();
+      imageurl = imageData.docs[0]['url'];
     } on FirebaseException catch (e) {
       print(e);
     }
     return;
   }
 
-  void onTapped(String year) {
-    final yeardata =
-        yearList.where((element) => element['name'] == year).toList();
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => SubjectScreen(yearId: yeardata[0]['id']),
-      ),
-    );
+  void onTapped(String id) {
+    final note = noteList.where((element) => element['id'] == id).toList();
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => PdfViewerScreen(url: note[0]['pdfurl']),
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return FutureBuilder(
-      future: _getYears(),
+      future: getNotes(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
@@ -101,38 +111,14 @@ class _HomepageState extends State<Homepage> {
                   childAspectRatio: 0.97,
                   mainAxisSpacing: 20,
                 ),
-                itemCount: yearList.length,
+                itemCount: noteList.length,
                 itemBuilder: (context, index) {
                   return GridItem(
-                    title: yearList[index]['name'],
+                    imageUrl: imageurl,
+                    title: noteList[index]['id'],
                     onTapped: onTapped,
                   );
                 },
-              ),
-              bottomNavigationBar: BottomNavigationBar(
-                onTap: (index) {
-                  _onSelectTab(index);
-                },
-                currentIndex: _currentindex,
-                selectedFontSize: 16,
-                selectedIconTheme: const IconThemeData(
-                  size: 28,
-                ),
-                backgroundColor: const Color.fromRGBO(138, 94, 65, 1),
-                selectedItemColor: Colors.white,
-                unselectedItemColor: Colors.white54,
-                items: const [
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.library_books_rounded),
-                    label: 'NOTES',
-                    backgroundColor: Color.fromRGBO(138, 94, 65, 1),
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.groups_outlined),
-                    label: 'COMMUNITY',
-                    backgroundColor: Color.fromRGBO(161, 125, 100, 1),
-                  ),
-                ],
               ),
             ),
           );
