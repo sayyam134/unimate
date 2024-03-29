@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:unimate/screens/home_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 final _firestore = FirebaseFirestore.instance;
+final _auth = FirebaseAuth.instance;
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -17,19 +19,37 @@ class _SignupState extends State<Signup> {
   final contactController = TextEditingController();
   final enrollmentController = TextEditingController();
   var instituteValue;
+  var instituteId;
   var departmentValue;
+  var departmentId;
   var institutes = [];
   var department = [];
 
-  void _submitform(){
-    if(_formKey.currentState!.validate()){
+  Future<void> _submitform() async {
+    final selectedDepartment = department
+        .where((element) => element['name'] == departmentValue)
+        .toList();
+    departmentId = selectedDepartment[0]['id'];
+    final user = _auth.currentUser!;
+    await _firestore.collection('users').doc(user.uid).set({
+      'name': nameController.text,
+      'contact': int.parse(contactController.text),
+      'photoURL': user.photoURL,
+      'enrolment': enrollmentController.text,
+      'instituteId': instituteId,
+      'departmentId': departmentId,
+    });
+
+    if (_formKey.currentState!.validate()) {
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-              const Homepage()));
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Homepage(),
+        ),
+      );
     }
   }
+
   Future<void> getInstitutes() async {
     final response = await _firestore.collection('institute').get();
     institutes = response.docs.map((e) => e.data()).toList();
@@ -42,10 +62,10 @@ class _SignupState extends State<Signup> {
     final instituteSelected = institutes
         .where((element) => element['name'] == instituteValue)
         .toList();
-    final id = instituteSelected[0]['id'];
+    instituteId = instituteSelected[0]['id'];
     final response = await _firestore
         .collection('institute')
-        .doc(id)
+        .doc(instituteId)
         .collection('department')
         .get();
     department = response.docs.map((e) => e.data()).toList();
@@ -101,7 +121,8 @@ class _SignupState extends State<Signup> {
                                   color: Color.fromRGBO(163, 136, 119, 1),
                                 ),
                                 filled: true,
-                                fillColor: const Color.fromRGBO(254, 253, 253, 1),
+                                fillColor:
+                                    const Color.fromRGBO(254, 253, 253, 1),
                                 errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
                                     borderSide: const BorderSide(
@@ -126,8 +147,13 @@ class _SignupState extends State<Signup> {
                               cursorColor: const Color.fromRGBO(138, 94, 65, 1),
                               textAlign: TextAlign.center,
                               controller: nameController,
-                              style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 24, color: Color.fromRGBO(163, 136, 119, 1)),
-                              validator: (name) => name!.isEmpty ? "Full Name is Required." : null,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24,
+                                  color: Color.fromRGBO(163, 136, 119, 1)),
+                              validator: (name) => name!.isEmpty
+                                  ? "Full Name is Required."
+                                  : null,
                             ),
                             const SizedBox(height: 38),
                             TextFormField(
@@ -137,7 +163,8 @@ class _SignupState extends State<Signup> {
                                     fontSize: 24,
                                     color: Color.fromRGBO(163, 136, 119, 1)),
                                 filled: true,
-                                fillColor: const Color.fromRGBO(254, 253, 253, 1),
+                                fillColor:
+                                    const Color.fromRGBO(254, 253, 253, 1),
                                 errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
                                     borderSide: const BorderSide(
@@ -163,17 +190,19 @@ class _SignupState extends State<Signup> {
                               textAlign: TextAlign.center,
                               controller: contactController,
                               validator: (number) {
-                                if(number!.isEmpty){
+                                if (number!.isEmpty) {
                                   return "Contact is Required.";
-                                }
-                                else if(number.length<10 || number.length>10){
+                                } else if (number.length < 10 ||
+                                    number.length > 10) {
                                   return "Enter Valid Contact.";
-                                }
-                                else{
+                                } else {
                                   return null;
                                 }
                               },
-                              style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 24, color: Color.fromRGBO(163, 136, 119, 1)),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24,
+                                  color: Color.fromRGBO(163, 136, 119, 1)),
                               keyboardType: TextInputType.number,
                             ),
                             const SizedBox(height: 38),
@@ -187,7 +216,8 @@ class _SignupState extends State<Signup> {
                                     fontSize: 24,
                                     color: Color.fromRGBO(163, 136, 119, 1)),
                                 filled: true,
-                                fillColor: const Color.fromRGBO(254, 253, 253, 1),
+                                fillColor:
+                                    const Color.fromRGBO(254, 253, 253, 1),
                                 errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
                                     borderSide: const BorderSide(
@@ -209,13 +239,17 @@ class _SignupState extends State<Signup> {
                                         width: 2.0,
                                         color: Color.fromRGBO(138, 94, 65, 1))),
                               ),
-                              validator: (inst) => inst==null ? "Select any One." : null,
+                              validator: (inst) =>
+                                  inst == null ? "Select any One." : null,
                               icon: const Icon(
                                 Icons.arrow_downward,
                                 color: Color.fromRGBO(163, 136, 119, 1),
                               ),
                               elevation: 16,
-                              style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 24, color: Color.fromRGBO(163, 136, 119, 1)),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24,
+                                  color: Color.fromRGBO(163, 136, 119, 1)),
                               items: institutes
                                   .map(
                                     (e) => DropdownMenuItem(
@@ -240,29 +274,6 @@ class _SignupState extends State<Signup> {
                                 await getDepartment();
                               },
                             ),
-                            // TextField(
-                            //   decoration: InputDecoration(
-                            //     hintText: "College",
-                            //     hintStyle: const TextStyle(
-                            //         fontSize: 24,
-                            //         color: Color.fromRGBO(163, 136, 119, 1)),
-                            //     filled: true,
-                            //     fillColor: const Color.fromRGBO(254, 253, 253, 1),
-                            //     focusedBorder: OutlineInputBorder(
-                            //         borderRadius: BorderRadius.circular(20),
-                            //         borderSide: const BorderSide(
-                            //             width: 2.0,
-                            //             color: Color.fromRGBO(138, 94, 65, 1))),
-                            //     enabledBorder: OutlineInputBorder(
-                            //         borderRadius: BorderRadius.circular(20),
-                            //         borderSide: const BorderSide(
-                            //             width: 2.0,
-                            //             color: Color.fromRGBO(138, 94, 65, 1))),
-                            //   ),
-                            //   cursorColor: const Color.fromRGBO(138, 94, 65, 1),
-                            //   textAlign: TextAlign.center,
-                            // ),
-
                             const SizedBox(height: 38),
                             DropdownButtonFormField(
                               isExpanded: true,
@@ -274,7 +285,8 @@ class _SignupState extends State<Signup> {
                                     fontSize: 24,
                                     color: Color.fromRGBO(163, 136, 119, 1)),
                                 filled: true,
-                                fillColor: const Color.fromRGBO(254, 253, 253, 1),
+                                fillColor:
+                                    const Color.fromRGBO(254, 253, 253, 1),
                                 errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
                                     borderSide: const BorderSide(
@@ -296,13 +308,17 @@ class _SignupState extends State<Signup> {
                                         width: 2.0,
                                         color: Color.fromRGBO(138, 94, 65, 1))),
                               ),
-                              validator: (dept) => dept==null ? "Select any One." : null,
+                              validator: (dept) =>
+                                  dept == null ? "Select any One." : null,
                               icon: const Icon(
                                 Icons.arrow_downward,
                                 color: Color.fromRGBO(163, 136, 119, 1),
                               ),
                               elevation: 16,
-                              style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 24, color: Color.fromRGBO(163, 136, 119, 1)),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24,
+                                  color: Color.fromRGBO(163, 136, 119, 1)),
                               items: department
                                   .map(
                                     (e) => DropdownMenuItem(
@@ -325,28 +341,6 @@ class _SignupState extends State<Signup> {
                                 });
                               },
                             ),
-                            // TextField(
-                            //   decoration: InputDecoration(
-                            //     hintText: "Department",
-                            //     hintStyle: const TextStyle(
-                            //         fontSize: 24,
-                            //         color: Color.fromRGBO(163, 136, 119, 1)),
-                            //     filled: true,
-                            //     fillColor: const Color.fromRGBO(254, 253, 253, 1),
-                            //     focusedBorder: OutlineInputBorder(
-                            //         borderRadius: BorderRadius.circular(20),
-                            //         borderSide: const BorderSide(
-                            //             width: 2.0,
-                            //             color: Color.fromRGBO(138, 94, 65, 1))),
-                            //     enabledBorder: OutlineInputBorder(
-                            //         borderRadius: BorderRadius.circular(20),
-                            //         borderSide: const BorderSide(
-                            //             width: 2.0,
-                            //             color: Color.fromRGBO(138, 94, 65, 1))),
-                            //   ),
-                            //   cursorColor: const Color.fromRGBO(138, 94, 65, 1),
-                            //   textAlign: TextAlign.center,
-                            // ),
                             const SizedBox(height: 38),
                             TextFormField(
                               decoration: InputDecoration(
@@ -355,7 +349,8 @@ class _SignupState extends State<Signup> {
                                     fontSize: 24,
                                     color: Color.fromRGBO(163, 136, 119, 1)),
                                 filled: true,
-                                fillColor: const Color.fromRGBO(254, 253, 253, 1),
+                                fillColor:
+                                    const Color.fromRGBO(254, 253, 253, 1),
                                 errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
                                     borderSide: const BorderSide(
@@ -378,19 +373,20 @@ class _SignupState extends State<Signup> {
                                         color: Color.fromRGBO(138, 94, 65, 1))),
                               ),
                               validator: (enroll) {
-                                if(enroll!.isEmpty){
+                                if (enroll!.isEmpty) {
                                   return "Enrolment is Required.";
-                                }
-                                else if(enroll.length<10 || enroll.length>10){
+                                } else if (enroll.length < 10) {
                                   return "Enter Valid Enrolment.";
-                                }
-                                else{
+                                } else {
                                   return null;
                                 }
                               },
                               cursorColor: const Color.fromRGBO(138, 94, 65, 1),
                               textAlign: TextAlign.center,
-                              style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 24, color: Color.fromRGBO(163, 136, 119, 1)),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24,
+                                  color: Color.fromRGBO(163, 136, 119, 1)),
                               controller: enrollmentController,
                             ),
                             const SizedBox(height: 30),
@@ -403,7 +399,8 @@ class _SignupState extends State<Signup> {
                                 },
                                 style: ElevatedButton.styleFrom(
                                   textStyle: const TextStyle(
-                                      fontSize: 24, fontWeight: FontWeight.bold),
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold),
                                   foregroundColor:
                                       const Color.fromRGBO(254, 253, 253, 1),
                                   backgroundColor:

@@ -27,7 +27,7 @@ Future<bool> signInWithGoogle(BuildContext context) async {
 
     if (user != null) {
       if (userCredentials.additionalUserInfo!.isNewUser) {
-        _firestore.collection('users').doc(user.uid);
+        await _firestore.collection('users').doc(user.uid);
         res = true;
       } else {
         res = false;

@@ -26,7 +26,8 @@ class MyApp extends StatelessWidget {
       title: 'Unimate',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromRGBO(245, 237, 232, 1)),
         useMaterial3: true,
         scaffoldBackgroundColor: const Color.fromRGBO(245, 237, 232, 1),
       ),

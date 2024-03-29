@@ -58,14 +58,11 @@ class _HomepageState extends State<Homepage> {
             childAspectRatio: 0.97,
             mainAxisSpacing: 20,
           ),
-          children: const [
-            GridItem(),
-            GridItem(),
-            GridItem(),
-            GridItem(),
-            GridItem(),
-            GridItem(),
-            GridItem(),
+          children: [
+            GridItem(
+              title: 'Unit-1',
+              subtitle: 'Intro',
+            ),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
