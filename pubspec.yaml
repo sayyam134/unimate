@@ -69,7 +69,7 @@ flutter:
   assets:
      - assests/images/google_logo.png
      - assests/images/google_logo_color.png
-     - assests/images/mainscreen_logo.jpg
+     - assests/images/mainscreen_logo.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

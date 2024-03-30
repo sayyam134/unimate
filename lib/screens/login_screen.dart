@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             CircleAvatar(
               radius: 100,
-              foregroundImage: AssetImage('assests/images/mainscreen_logo.jpg'),
+              foregroundImage: AssetImage('assests/images/mainscreen_logo.png'),
             ),
             SizedBox(
               height: 60,
