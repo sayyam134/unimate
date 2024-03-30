@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lottie/lottie.dart';
 import 'package:unimate/screens/pdf_viewer_screen.dart';
 import 'package:unimate/widgets/appBar.dart';
 
@@ -69,8 +70,16 @@ class _NoteScreenState extends State<NoteScreen> {
       future: getNotes(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return SafeArea(
+            child: Scaffold(
+              body: Center(
+                child: Lottie.asset(
+                    "assests/animation/loading.json",
+                    width: 300,
+                    height: 300
+                ),
+              ),
+            ),
           );
         } else {
           return SafeArea(

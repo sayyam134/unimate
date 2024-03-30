@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lottie/lottie.dart';
 import 'package:unimate/screens/unit_screen.dart';
 import '../widgets/appBar.dart';
 import '../widgets/grid_item.dart';
@@ -72,8 +73,16 @@ class _SubjectScreenState extends State<SubjectScreen> {
       future: getSubjects(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return SafeArea(
+            child: Scaffold(
+              body: Center(
+                child: Lottie.asset(
+                    "assests/animation/loading.json",
+                  width: 300,
+                  height: 300
+                ),
+              ),
+            ),
           );
         } else {
           return SafeArea(

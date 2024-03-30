@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:unimate/resources/authentication.dart';
 import 'package:unimate/screens/subject_screen.dart';
 import 'package:unimate/widgets/appBar.dart';
@@ -59,8 +60,16 @@ class _HomepageState extends State<Homepage> {
       future: _getYears(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return SafeArea(
+            child: Scaffold(
+              body: Center(
+                child: Lottie.asset(
+                    "assests/animation/loading.json",
+                    width: 300,
+                    height: 300
+                ),
+              ),
+            ),
           );
         } else {
           return SafeArea(
