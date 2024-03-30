@@ -72,6 +72,7 @@ class _HomepageState extends State<Homepage> {
                 //   Icons.notifications,
                 //   color: Colors.black,
                 // ),
+                automaticallyImplyLeading: false,
                 title: const Text(
                   'UniMate',
                   style: TextStyle(
