@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:unimate/screens/note_screen.dart';
 
+import '../widgets/appBar.dart';
 import '../widgets/grid_item.dart';
 
 final _firestore = FirebaseFirestore.instance;
@@ -74,30 +75,7 @@ class _UnitScreenState extends State<UnitScreen> {
         } else {
           return SafeArea(
             child: Scaffold(
-              appBar: AppBar(
-                centerTitle: true,
-                backgroundColor: const Color.fromRGBO(245, 237, 232, 1),
-                elevation: 0,
-                title: const Text(
-                  'UniMate',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 28,
-                    color: Colors.black,
-                  ),
-                ),
-                actions: [
-                  InkWell(
-                    child: CircleAvatar(
-                      foregroundImage: NetworkImage(
-                          FirebaseAuth.instance.currentUser!.photoURL!),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  )
-                ],
-              ),
+              appBar: const Appbar(leading: true,),
               body: GridView.builder(
                 padding: const EdgeInsets.all(24),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

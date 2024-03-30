@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unimate/resources/authentication.dart';
 import 'package:unimate/screens/subject_screen.dart';
+import 'package:unimate/widgets/appBar.dart';
 import 'package:unimate/widgets/grid_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -64,34 +65,7 @@ class _HomepageState extends State<Homepage> {
         } else {
           return SafeArea(
             child: Scaffold(
-              appBar: AppBar(
-                centerTitle: true,
-                backgroundColor: const Color.fromRGBO(245, 237, 232, 1),
-                elevation: 0,
-                automaticallyImplyLeading: false,
-                title: const Text(
-                  'UniMate',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 28,
-                    color: Color.fromRGBO(138, 94, 65, 1),
-                  ),
-                ),
-                actions: [
-                  InkWell(
-                    onTap: () async {
-                      await logOut(context);
-                    },
-                    child: CircleAvatar(
-                      foregroundImage: NetworkImage(
-                          FirebaseAuth.instance.currentUser!.photoURL!),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  )
-                ],
-              ),
+              appBar: const Appbar(leading: false),
               body: GridView.builder(
                 padding: const EdgeInsets.all(24),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
