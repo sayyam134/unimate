@@ -38,9 +38,9 @@ class _UnitScreenState extends State<UnitScreen> {
           .collection('unit')
           .get();
       unitList = data.docs.map((e) => e.data()).toList();
-      // unitList.sort((a, b) {
-      //   a
-      // },)
+      unitList.sort(
+        (a, b) => a['name'].compareTo(b['name']),
+      );
     } on FirebaseException catch (e) {
       print(e);
     }
