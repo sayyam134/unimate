@@ -75,7 +75,7 @@ class _NoteScreenState extends State<NoteScreen> {
         } else {
           return SafeArea(
             child: Scaffold(
-              appBar: const Appbar(leading: true,),
+              appBar: const Appbar(leading: true),
               body: GridView.builder(
                 padding: const EdgeInsets.all(24),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
