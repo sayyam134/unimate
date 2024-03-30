@@ -26,21 +26,21 @@ class _SignupState extends State<Signup> {
   var department = [];
 
   Future<void> _submitform() async {
-    final selectedDepartment = department
-        .where((element) => element['name'] == departmentValue)
-        .toList();
-    departmentId = selectedDepartment[0]['id'];
-    final user = _auth.currentUser!;
-    await _firestore.collection('users').doc(user.uid).set({
-      'name': nameController.text,
-      'contact': int.parse(contactController.text),
-      'photoURL': user.photoURL,
-      'enrolment': enrollmentController.text,
-      'instituteId': instituteId,
-      'departmentId': departmentId,
-    });
-
     if (_formKey.currentState!.validate()) {
+      final selectedDepartment = department
+          .where((element) => element['name'] == departmentValue)
+          .toList();
+      departmentId = selectedDepartment[0]['id'];
+      final user = _auth.currentUser!;
+      await _firestore.collection('users').doc(user.uid).set({
+        'name': nameController.text,
+        'contact': int.parse(contactController.text),
+        'photoURL': user.photoURL,
+        'enrolment': enrollmentController.text,
+        'instituteId': instituteId,
+        'departmentId': departmentId,
+      });
+
       Navigator.push(
         context,
         MaterialPageRoute(

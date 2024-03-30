@@ -78,10 +78,6 @@ class _NoteScreenState extends State<NoteScreen> {
                 centerTitle: true,
                 backgroundColor: const Color.fromRGBO(245, 237, 232, 1),
                 elevation: 0,
-                leading: const Icon(
-                  Icons.notifications,
-                  color: Colors.black,
-                ),
                 title: const Text(
                   'UniMate',
                   style: TextStyle(
@@ -93,9 +89,8 @@ class _NoteScreenState extends State<NoteScreen> {
                 actions: [
                   InkWell(
                     child: CircleAvatar(
-                      child:
-                          Image.asset('assests/images/google_logo_color.png'),
-                      radius: 15,
+                      foregroundImage: NetworkImage(
+                          FirebaseAuth.instance.currentUser!.photoURL!),
                     ),
                   ),
                   const SizedBox(
