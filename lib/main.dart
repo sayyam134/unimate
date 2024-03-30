@@ -25,6 +25,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Unimate',
       debugShowCheckedModeBanner: false,
+      routes: {
+        '/home': (context) => Homepage(),
+      },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
             seedColor: const Color.fromRGBO(245, 237, 232, 1)),
