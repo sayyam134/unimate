@@ -56,7 +56,7 @@ class GridItem extends StatelessWidget {
                         : SizedBox(),
                   ]
                 : [
-                    Image.network(
+                    Image.asset(
                       imageUrl,
                       fit: BoxFit.scaleDown,
                       height: 90,

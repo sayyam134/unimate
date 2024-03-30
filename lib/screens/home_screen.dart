@@ -68,10 +68,6 @@ class _HomepageState extends State<Homepage> {
                 centerTitle: true,
                 backgroundColor: const Color.fromRGBO(245, 237, 232, 1),
                 elevation: 0,
-                // leading: const Icon(
-                //   Icons.notifications,
-                //   color: Colors.black,
-                // ),
                 automaticallyImplyLeading: false,
                 title: const Text(
                   'UniMate',

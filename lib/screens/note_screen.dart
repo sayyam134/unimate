@@ -26,7 +26,7 @@ class NoteScreen extends StatefulWidget {
 
 class _NoteScreenState extends State<NoteScreen> {
   var noteList = [];
-  var imageurl;
+  // var imageurl;
   Future<void> getNotes() async {
     try {
       final userId = await FirebaseAuth.instance.currentUser!.uid;
@@ -46,8 +46,8 @@ class _NoteScreenState extends State<NoteScreen> {
           .collection('note')
           .get();
       noteList = data.docs.map((e) => e.data()).toList();
-      final imageData = await _firestore.collection('pdfimage').get();
-      imageurl = imageData.docs[0]['url'];
+      // final imageData = await _firestore.collection('pdfimage').get();
+      // imageurl = imageData.docs[0]['url'];
     } on FirebaseException catch (e) {
       print(e);
     }
@@ -109,7 +109,7 @@ class _NoteScreenState extends State<NoteScreen> {
                 itemCount: noteList.length,
                 itemBuilder: (context, index) {
                   return GridItem(
-                    imageUrl: imageurl,
+                    imageUrl: '/assests/images/pdf_image.png',
                     title: noteList[index]['id'],
                     onTapped: onTapped,
                   );
