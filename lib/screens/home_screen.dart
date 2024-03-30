@@ -78,7 +78,7 @@ class _HomepageState extends State<Homepage> {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 28,
-                    color: Colors.black,
+                    color: Color.fromRGBO(138, 94, 65, 1),
                   ),
                 ),
                 actions: [
