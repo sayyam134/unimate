@@ -18,15 +18,16 @@ class SubjectScreen extends StatefulWidget {
 
 class _SubjectScreenState extends State<SubjectScreen> {
   var subjectList = [];
-  
-  String name(index){
-    String displayword = "";
-    String currword = subjectList[index]['name'];
-    for(int i = 0; i<10; i++){
-      displayword += currword[i];
-    }
-    return "$displayword.....";
-  }
+
+  // String name(index) {
+  //   String displayword = "";
+  //   String currword = subjectList[index]['name'];
+  //   for (int i = 0; i < currword.length; i++) {
+  //     displayword += currword[i];
+  //   }
+  //   return "$displayword";
+  // }
+
   Future<void> getSubjects() async {
     try {
       final userId = await FirebaseAuth.instance.currentUser!.uid;
@@ -49,8 +50,9 @@ class _SubjectScreenState extends State<SubjectScreen> {
   }
 
   void onTapped(String subject) {
-    final subjectData =
-        subjectList.where((element) => element['shortform'] == subject).toList();
+    final subjectData = subjectList
+        .where((element) => element['shortform'] == subject)
+        .toList();
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) =>
@@ -108,7 +110,7 @@ class _SubjectScreenState extends State<SubjectScreen> {
                 itemBuilder: (context, index) {
                   return GridItem(
                     title: subjectList[index]['shortform'],
-                    subtitle: name(index),
+                    subtitle: subjectList[index]['name'],
                     onTapped: onTapped,
                   );
                 },

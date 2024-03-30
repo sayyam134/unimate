@@ -38,6 +38,9 @@ class _UnitScreenState extends State<UnitScreen> {
           .collection('unit')
           .get();
       unitList = data.docs.map((e) => e.data()).toList();
+      // unitList.sort((a, b) {
+      //   a
+      // },)
     } on FirebaseException catch (e) {
       print(e);
     }

@@ -82,6 +82,9 @@ class _HomepageState extends State<Homepage> {
                 ),
                 actions: [
                   InkWell(
+                    onTap: () async {
+                      await logOut(context);
+                    },
                     child: CircleAvatar(
                       foregroundImage: NetworkImage(
                           FirebaseAuth.instance.currentUser!.photoURL!),

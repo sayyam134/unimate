@@ -13,7 +13,11 @@ class PdfViewerScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Note'),
       ),
-      body: SfPdfViewer.network(url),
+      body: SfPdfViewer.network(
+        url,
+        canShowPageLoadingIndicator: true,
+        enableDoubleTapZooming: true,
+      ),
     );
   }
 }

@@ -47,9 +47,11 @@ class GridItem extends StatelessWidget {
                             subtitle,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
-                                color: Color.fromRGBO(163, 136, 119, 1),
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
+                              color: Color.fromRGBO(163, 136, 119, 1),
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            maxLines: 4,
                           )
                         : SizedBox(),
                   ]

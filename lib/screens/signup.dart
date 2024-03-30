@@ -39,6 +39,7 @@ class _SignupState extends State<Signup> {
         'enrolment': enrollmentController.text,
         'instituteId': instituteId,
         'departmentId': departmentId,
+        'email': user.email
       });
 
       Navigator.push(
