@@ -10,11 +10,12 @@ class Appbar extends StatelessWidget implements PreferredSize {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.only(top: 10),
       child: AppBar(
         centerTitle: true,
         backgroundColor: Colors.transparent, //Color.fromRGBO(245, 237, 232, 1),
-        elevation: 0,
+        //elevation: 0,
+        scrolledUnderElevation: 0,
         automaticallyImplyLeading: leading,
 
         title: const Text(
