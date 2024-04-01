@@ -4,7 +4,6 @@ import '../resources/authentication.dart';
 
 class Appbar extends StatelessWidget implements PreferredSize {
   const Appbar({super.key, required this.leading});
-
   final leading;
 
   @override
@@ -14,10 +13,8 @@ class Appbar extends StatelessWidget implements PreferredSize {
       child: AppBar(
         centerTitle: true,
         backgroundColor: Colors.transparent, //Color.fromRGBO(245, 237, 232, 1),
-        //elevation: 0,
         scrolledUnderElevation: 0,
         automaticallyImplyLeading: leading,
-
         title: const Text(
           'UniMate',
           style: TextStyle(
@@ -26,6 +23,14 @@ class Appbar extends StatelessWidget implements PreferredSize {
             color: Color.fromRGBO(138, 94, 65, 1),
           ),
         ),
+        leading: leading?GestureDetector(
+          onTap: (){
+            if(leading){
+              Navigator.pop(context);
+            }
+          },
+          child: const Icon(Icons.arrow_back_ios_new_rounded, color: Color.fromRGBO(138, 94, 65, 1)),
+        ):null,
         actions: [
           InkWell(
             onTap: () async {
