@@ -46,7 +46,7 @@ class _SubjectScreenState extends State<SubjectScreen> {
           .get();
       subjectList = data.docs.map((e) => e.data()).toList();
       subjectList.sort(
-        (a, b) => a['name'].compareTo(b['name']),
+        (a, b) => a['shortform'].compareTo(b['shortform']),
       );
     } on FirebaseException catch (e) {
       print(e);
