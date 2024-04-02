@@ -1,14 +1,14 @@
-import 'dart:io';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unimate/resources/authentication.dart';
+import 'package:url_launcher/link.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class rDrawer extends StatelessWidget {
   const rDrawer({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -141,6 +141,23 @@ class rDrawer extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 15,),
+                    Link(
+                      target: LinkTarget.self,
+                      uri: Uri.parse("https://www.termsfeed.com/live/f355bbee-79ee-4228-b5c0-9ec75a890ed6"),
+                      builder: (BuildContext context, followLink)=> InkWell(
+                        onTap: followLink,
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(width: 10),
+                            Icon(Icons.privacy_tip_outlined, size: 25,),
+                            SizedBox(width: 10),
+                            Text("Privacy Policy", style: TextStyle(fontSize: 20),)
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 15,),
                     InkWell(
                       onTap: ()async{
                         await logOut(context);
@@ -165,3 +182,4 @@ class rDrawer extends StatelessWidget {
     );
   }
 }
+
