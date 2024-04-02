@@ -105,7 +105,7 @@ class _HomepageState extends State<Homepage> {
                 },
                 currentIndex: _currentindex,
                 selectedFontSize: 22,
-                unselectedFontSize: 16,
+                unselectedFontSize: 18,
                 selectedIconTheme: const IconThemeData(
                   size: 34,
                 ),
@@ -121,7 +121,7 @@ class _HomepageState extends State<Homepage> {
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.groups_outlined),
-                    label: 'COMMUNITY',
+                    label: 'CHANNEL',
                     backgroundColor: Color.fromRGBO(161, 125, 100, 1),
                   ),
                 ],
