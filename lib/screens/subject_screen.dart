@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:unimate/screens/unit_screen.dart';
 import '../widgets/appBar.dart';
 import '../widgets/grid_item.dart';
+import '../widgets/sideBar.dart';
 
 final _firestore = FirebaseFirestore.instance;
 
@@ -84,6 +85,7 @@ class _SubjectScreenState extends State<SubjectScreen> {
         } else {
           return SafeArea(
             child: Scaffold(
+              endDrawer: const rDrawer(),
               appBar: const Appbar(
                 leading: true,
               ),

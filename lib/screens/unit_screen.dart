@@ -6,6 +6,7 @@ import 'package:unimate/screens/note_screen.dart';
 
 import '../widgets/appBar.dart';
 import '../widgets/grid_item.dart';
+import '../widgets/sideBar.dart';
 
 final _firestore = FirebaseFirestore.instance;
 
@@ -81,6 +82,7 @@ class _UnitScreenState extends State<UnitScreen> {
         } else {
           return SafeArea(
             child: Scaffold(
+              endDrawer: const rDrawer(),
               appBar: const Appbar(
                 leading: true,
               ),

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../resources/authentication.dart';
 
@@ -33,8 +34,8 @@ class Appbar extends StatelessWidget implements PreferredSize {
         ):null,
         actions: [
           InkWell(
-            onTap: () async {
-              await logOut(context);
+            onTap: () {
+              Scaffold.of(context).openEndDrawer();
             },
             child: CircleAvatar(
               foregroundImage:

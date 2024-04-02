@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:unimate/resources/authentication.dart';
 import 'package:unimate/screens/subject_screen.dart';
 import 'package:unimate/widgets/appBar.dart';
 import 'package:unimate/widgets/grid_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:unimate/widgets/sideBar.dart';
 
 final _firestore = FirebaseFirestore.instance;
 
@@ -30,7 +30,7 @@ class _HomepageState extends State<Homepage> {
       return;
     }
     try {
-      final userId = await FirebaseAuth.instance.currentUser!.uid;
+      final userId = FirebaseAuth.instance.currentUser!.uid;
       var response = await _firestore.collection('users').doc(userId).get();
       final user = response.data();
       final data = await _firestore
@@ -77,6 +77,7 @@ class _HomepageState extends State<Homepage> {
         } else {
           return SafeArea(
             child: Scaffold(
+              endDrawer: const rDrawer(),
               appBar: const Appbar(leading: false),
               body: _currentindex == 0
                   ? GridView.builder(
@@ -97,7 +98,12 @@ class _HomepageState extends State<Homepage> {
                       },
                     )
                   : const Center(
-                      child: Text('Coming Soon..'),
+                      child: Text('Coming Soon...',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 32,
+                        color: Color.fromRGBO(138, 94, 65, 1),
+                      ),),
                     ),
               bottomNavigationBar: BottomNavigationBar(
                 onTap: (index) {
@@ -109,7 +115,7 @@ class _HomepageState extends State<Homepage> {
                 selectedIconTheme: const IconThemeData(
                   size: 34,
                 ),
-                unselectedIconTheme: IconThemeData(size: 28),
+                unselectedIconTheme: const IconThemeData(size: 28),
                 backgroundColor: const Color.fromRGBO(138, 94, 65, 1),
                 selectedItemColor: Colors.white,
                 unselectedItemColor: Colors.white54,

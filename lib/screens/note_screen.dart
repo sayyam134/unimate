@@ -8,6 +8,7 @@ import 'package:unimate/screens/pdf_viewer_screen.dart';
 import 'package:unimate/widgets/appBar.dart';
 
 import '../widgets/grid_item.dart';
+import '../widgets/sideBar.dart';
 
 final _firestore = FirebaseFirestore.instance;
 
@@ -83,6 +84,7 @@ class _NoteScreenState extends State<NoteScreen> {
         } else {
           return SafeArea(
             child: Scaffold(
+              endDrawer: const rDrawer(),
               appBar: const Appbar(leading: true),
               body: noteList.isNotEmpty
                   ? GridView.builder(
