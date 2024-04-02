@@ -28,12 +28,12 @@ class _LoginButtonScreen extends State<LoginButton> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: signIn,
-      splashColor: Color.fromRGBO(144, 101, 71, 0.5),
       child: Container(
         width: 230,
         height: 50,
         decoration: BoxDecoration(
-          color: Color.fromRGBO(144, 101, 71, 1),
+          border: Border.all(color: const Color.fromRGBO(138, 94, 65, 1), width: 3),
+          color: const Color.fromRGBO(245, 238, 232, 1),
           borderRadius: BorderRadius.circular(30),
         ),
         child: Row(
@@ -44,11 +44,11 @@ class _LoginButtonScreen extends State<LoginButton> {
               width: 10,
             ),
             const Text(
-              'SingUp/Login',
+              'SignUp/Login',
               style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white),
+                  color: Color.fromRGBO(138, 94, 65, 1)),
             ),
           ],
         ),
