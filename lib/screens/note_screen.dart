@@ -73,11 +73,8 @@ class _NoteScreenState extends State<NoteScreen> {
           return SafeArea(
             child: Scaffold(
               body: Center(
-                child: Lottie.asset(
-                    "assests/animation/loading.json",
-                    width: 300,
-                    height: 300
-                ),
+                child: Lottie.asset("assests/animation/loading.json",
+                    width: 300, height: 300),
               ),
             ),
           );
@@ -85,23 +82,28 @@ class _NoteScreenState extends State<NoteScreen> {
           return SafeArea(
             child: Scaffold(
               appBar: const Appbar(leading: true),
-              body: GridView.builder(
-                padding: const EdgeInsets.all(24),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 20,
-                  childAspectRatio: 0.97,
-                  mainAxisSpacing: 20,
-                ),
-                itemCount: noteList.length,
-                itemBuilder: (context, index) {
-                  return GridItem(
-                    imageUrl: 'assests/images/pdf_image.png',
-                    title: noteList[index]['id'],
-                    onTapped: onTapped,
-                  );
-                },
-              ),
+              body: noteList.isNotEmpty
+                  ? GridView.builder(
+                      padding: const EdgeInsets.all(24),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 20,
+                        childAspectRatio: 0.97,
+                        mainAxisSpacing: 20,
+                      ),
+                      itemCount: noteList.length,
+                      itemBuilder: (context, index) {
+                        return GridItem(
+                          imageUrl: 'assests/images/pdf_image.png',
+                          title: noteList[index]['id'],
+                          onTapped: onTapped,
+                        );
+                      },
+                    )
+                  : const Center(
+                      child: Text('Coming Soon..'),
+                    ),
             ),
           );
         }

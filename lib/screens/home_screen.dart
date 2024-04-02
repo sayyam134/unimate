@@ -26,6 +26,9 @@ class _HomepageState extends State<Homepage> {
 
   var yearList = [];
   Future<void> _getYears() async {
+    if (_currentindex != 0) {
+      return;
+    }
     try {
       final userId = await FirebaseAuth.instance.currentUser!.uid;
       var response = await _firestore.collection('users').doc(userId).get();
@@ -38,6 +41,9 @@ class _HomepageState extends State<Homepage> {
           .collection('year')
           .get();
       yearList = data.docs.map((e) => e.data()).toList();
+      yearList.sort(
+        (a, b) => a['name'].compareTo(b['name']),
+      );
     } on FirebaseException catch (e) {
       print(e);
     }
@@ -63,11 +69,8 @@ class _HomepageState extends State<Homepage> {
           return SafeArea(
             child: Scaffold(
               body: Center(
-                child: Lottie.asset(
-                    "assests/animation/loading.json",
-                    width: 300,
-                    height: 300
-                ),
+                child: Lottie.asset("assests/animation/loading.json",
+                    width: 300, height: 300),
               ),
             ),
           );
@@ -75,32 +78,38 @@ class _HomepageState extends State<Homepage> {
           return SafeArea(
             child: Scaffold(
               appBar: const Appbar(leading: false),
-              body: GridView.builder(
-                padding: const EdgeInsets.all(24),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 20,
-                  childAspectRatio: 0.97,
-                  mainAxisSpacing: 20,
-                ),
-                itemCount: yearList.length,
-                itemBuilder: (context, index) {
-                  return GridItem(
-                    title: yearList[index]['name'],
-                    onTapped: onTapped,
-                  );
-                },
-              ),
+              body: _currentindex == 0
+                  ? GridView.builder(
+                      padding: const EdgeInsets.all(24),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 20,
+                        childAspectRatio: 0.97,
+                        mainAxisSpacing: 20,
+                      ),
+                      itemCount: yearList.length,
+                      itemBuilder: (context, index) {
+                        return GridItem(
+                          title: yearList[index]['name'],
+                          onTapped: onTapped,
+                        );
+                      },
+                    )
+                  : const Center(
+                      child: Text('Coming Soon..'),
+                    ),
               bottomNavigationBar: BottomNavigationBar(
                 onTap: (index) {
                   _onSelectTab(index);
                 },
                 currentIndex: _currentindex,
-                selectedFontSize: 20,
-                unselectedFontSize: 18,
+                selectedFontSize: 22,
+                unselectedFontSize: 16,
                 selectedIconTheme: const IconThemeData(
-                  size: 28,
+                  size: 34,
                 ),
+                unselectedIconTheme: IconThemeData(size: 28),
                 backgroundColor: const Color.fromRGBO(138, 94, 65, 1),
                 selectedItemColor: Colors.white,
                 unselectedItemColor: Colors.white54,
@@ -112,7 +121,7 @@ class _HomepageState extends State<Homepage> {
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.groups_outlined),
-                    label: 'CHANNEL',
+                    label: 'COMMUNITY',
                     backgroundColor: Color.fromRGBO(161, 125, 100, 1),
                   ),
                 ],
