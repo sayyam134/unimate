@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -102,7 +104,13 @@ class _NoteScreenState extends State<NoteScreen> {
                       },
                     )
                   : const Center(
-                      child: Text('Coming Soon..'),
+                      child: Text('Coming Soon..',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 32,
+                        color: Color.fromRGBO(138, 94, 65, 1),
+                      ),
+                      ),
                     ),
             ),
           );
