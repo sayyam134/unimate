@@ -41,6 +41,9 @@ class _HomepageState extends State<Homepage> {
           .collection('year')
           .get();
       yearList = data.docs.map((e) => e.data()).toList();
+      yearList.sort(
+        (a, b) => a['name'].compareTo(b['name']),
+      );
     } on FirebaseException catch (e) {
       print(e);
     }

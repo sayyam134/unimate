@@ -76,35 +76,39 @@ class _SubjectScreenState extends State<SubjectScreen> {
           return SafeArea(
             child: Scaffold(
               body: Center(
-                child: Lottie.asset(
-                    "assests/animation/loading.json",
-                  width: 300,
-                  height: 300
-                ),
+                child: Lottie.asset("assests/animation/loading.json",
+                    width: 300, height: 300),
               ),
             ),
           );
         } else {
           return SafeArea(
             child: Scaffold(
-              appBar: const Appbar(leading: true,),
-              body: GridView.builder(
-                padding: const EdgeInsets.all(24),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 20,
-                  childAspectRatio: 0.97,
-                  mainAxisSpacing: 20,
-                ),
-                itemCount: subjectList.length,
-                itemBuilder: (context, index) {
-                  return GridItem(
-                    title: subjectList[index]['shortform'],
-                    subtitle: subjectList[index]['name'],
-                    onTapped: onTapped,
-                  );
-                },
+              appBar: const Appbar(
+                leading: true,
               ),
+              body: subjectList.isNotEmpty
+                  ? GridView.builder(
+                      padding: const EdgeInsets.all(24),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 20,
+                        childAspectRatio: 0.97,
+                        mainAxisSpacing: 20,
+                      ),
+                      itemCount: subjectList.length,
+                      itemBuilder: (context, index) {
+                        return GridItem(
+                          title: subjectList[index]['shortform'],
+                          subtitle: subjectList[index]['name'],
+                          onTapped: onTapped,
+                        );
+                      },
+                    )
+                  : const Center(
+                      child: Text('Coming Soon..'),
+                    ),
             ),
           );
         }
