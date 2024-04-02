@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unimate/resources/authentication.dart';
 
@@ -25,20 +28,24 @@ class rDrawer extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text("Aliasgar Kuwakhedawala",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                  Text(FirebaseAuth.instance.currentUser!.displayName.toString(),
+                   style: const TextStyle(
+                     fontSize: 20,
+                     fontWeight: FontWeight.bold,
+                     color: Colors.black,
+                   ),
+                   textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  textAlign: TextAlign.center,
-                ),
                 const SizedBox(height: 4,),
-                const Text("sayyam134@gmail.com",
-                style: TextStyle(
-                  fontSize: 11,
+                 Text(FirebaseAuth.instance.currentUser!.email.toString(),
+                style: const TextStyle(
+                  fontSize: 14,
                   color: Colors.black
                 ),
+                   maxLines: 1,
+                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 10,),
                 const Divider(thickness: 3,),
