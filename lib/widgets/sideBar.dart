@@ -1,10 +1,8 @@
-
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:unimate/resources/authentication.dart';
 import 'package:url_launcher/link.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class rDrawer extends StatelessWidget {
   const rDrawer({super.key});
