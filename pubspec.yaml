@@ -71,7 +71,7 @@ flutter:
      - assests/images/google_logo_color.png
      - assests/images/mainscreen_logo.png
      - assests/images/pdf_image.png
-     - assests/animation/loading.json
+     - assests/animation/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

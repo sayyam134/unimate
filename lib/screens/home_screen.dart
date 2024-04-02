@@ -96,7 +96,8 @@ class _HomepageState extends State<Homepage> {
                   _onSelectTab(index);
                 },
                 currentIndex: _currentindex,
-                selectedFontSize: 16,
+                selectedFontSize: 20,
+                unselectedFontSize: 18,
                 selectedIconTheme: const IconThemeData(
                   size: 28,
                 ),
@@ -111,7 +112,7 @@ class _HomepageState extends State<Homepage> {
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.groups_outlined),
-                    label: 'COMMUNITY',
+                    label: 'CHANNEL',
                     backgroundColor: Color.fromRGBO(161, 125, 100, 1),
                   ),
                 ],
