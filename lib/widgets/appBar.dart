@@ -30,7 +30,7 @@ class Appbar extends StatelessWidget implements PreferredSize {
               Navigator.pop(context);
             }
           },
-          child: const Icon(Icons.arrow_back_ios_new_rounded, color: Color.fromRGBO(138, 94, 65, 1)),
+          child: const Icon(Icons.arrow_back_ios_new_rounded, color: Color.fromRGBO(138, 94, 65, 1), size: 35,),
         ):null,
         actions: [
           InkWell(

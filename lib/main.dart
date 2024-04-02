@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:unimate/screens/home_screen.dart';
 import 'package:unimate/screens/login_screen.dart';
-import 'package:unimate/screens/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
 
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget {
       title: 'Unimate',
       debugShowCheckedModeBanner: false,
       routes: {
-        '/home': (context) => Homepage(),
+        '/home': (context) => const Homepage(),
       },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
