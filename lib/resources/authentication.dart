@@ -34,22 +34,20 @@ Future<bool> signInWithGoogle(BuildContext context) async {
             isEqualTo: uid,
           )
           .get();
-
       if (firestoreUsers.size == 0) {
-        await _firestore.collection('users').doc(user.uid);
-        res = true;
+        return true;
       } else {
-        res = false;
+        return false;
       }
     }
   } on FirebaseAuthException catch (error) {
-    res = false;
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(error.message!),
       ),
     );
+    res = false;
   }
   return res;
 }

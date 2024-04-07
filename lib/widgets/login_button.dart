@@ -15,7 +15,7 @@ class LoginButton extends StatefulWidget {
 class _LoginButtonScreen extends State<LoginButton> {
   void signIn() async {
     final res = await signInWithGoogle(context);
-    if (res) {
+    if (res == true) {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const Signup()));
     } else {
