@@ -15,13 +15,18 @@ class LoginButton extends StatefulWidget {
 class _LoginButtonScreen extends State<LoginButton> {
   void signIn() async {
     final res = await signInWithGoogle(context);
-    if (res == true) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Signup()));
-    } else {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Homepage()));
-    }
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => Homepage(),
+    ));
+    // if (res == true) {
+    //   print('user is new');
+    //   Navigator.of(context)
+    //       .push(MaterialPageRoute(builder: (context) => const Signup()));
+    // } else {
+    //   print('user is not new');
+    //   Navigator.of(context)
+    //       .push(MaterialPageRoute(builder: (context) => const Homepage()));
+    // }
   }
 
   @override

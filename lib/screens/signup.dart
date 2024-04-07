@@ -42,9 +42,7 @@ class _SignupState extends State<Signup> {
         'email': user.email,
         'uid': _auth.currentUser!.uid,
       });
-      if (_auth.currentUser == null) {
-        //   Add snackbar for message that user is null
-      }
+      if (_auth.currentUser == null) {}
       Navigator.push(
         context,
         MaterialPageRoute(

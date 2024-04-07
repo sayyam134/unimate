@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:unimate/screens/signup.dart';
 import 'package:unimate/screens/subject_screen.dart';
 import 'package:unimate/widgets/appBar.dart';
 import 'package:unimate/widgets/grid_item.dart';
@@ -33,20 +34,27 @@ class _HomepageState extends State<Homepage> {
       final userId = FirebaseAuth.instance.currentUser!.uid;
       var response = await _firestore.collection('users').doc(userId).get();
       final user = response.data();
-      final data = await _firestore
-          .collection('institute')
-          .doc(user!['instituteId'])
-          .collection('department')
-          .doc(user['departmentId'])
-          .collection('year')
-          .get();
-      yearList = data.docs.map((e) => e.data()).toList();
-      yearList.sort(
-        (a, b) => a['name'].compareTo(b['name']),
-      );
+      if (user == null) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => Signup(),
+        ));
+      } else {
+        final data = await _firestore
+            .collection('institute')
+            .doc(user['instituteId'])
+            .collection('department')
+            .doc(user['departmentId'])
+            .collection('year')
+            .get();
+        yearList = data.docs.map((e) => e.data()).toList();
+        yearList.sort(
+          (a, b) => a['name'].compareTo(b['name']),
+        );
+      }
     } on FirebaseException catch (e) {
       print(e);
     }
+
     return;
   }
 
@@ -98,12 +106,14 @@ class _HomepageState extends State<Homepage> {
                       },
                     )
                   : const Center(
-                      child: Text('Coming Soon...',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 32,
-                        color: Color.fromRGBO(138, 94, 65, 1),
-                      ),),
+                      child: Text(
+                        'Coming Soon...',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 32,
+                          color: Color.fromRGBO(138, 94, 65, 1),
+                        ),
+                      ),
                     ),
               bottomNavigationBar: BottomNavigationBar(
                 onTap: (index) {
