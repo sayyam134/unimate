@@ -32,7 +32,8 @@ class _LoginButtonScreen extends State<LoginButton> {
         width: 230,
         height: 50,
         decoration: BoxDecoration(
-          border: Border.all(color: const Color.fromRGBO(138, 94, 65, 1), width: 3),
+          border:
+              Border.all(color: const Color.fromRGBO(138, 94, 65, 1), width: 3),
           color: const Color.fromRGBO(245, 238, 232, 1),
           borderRadius: BorderRadius.circular(30),
         ),

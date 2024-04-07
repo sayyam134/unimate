@@ -26,7 +26,7 @@ class _SignupState extends State<Signup> {
   var department = [];
 
   Future<void> _submitform() async {
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate() && _auth.currentUser != null) {
       final selectedDepartment = department
           .where((element) => element['name'] == departmentValue)
           .toList();
@@ -39,9 +39,12 @@ class _SignupState extends State<Signup> {
         'enrolment': enrollmentController.text,
         'instituteId': instituteId,
         'departmentId': departmentId,
-        'email': user.email
+        'email': user.email,
+        'uid': _auth.currentUser!.uid,
       });
-
+      if (_auth.currentUser == null) {
+        //   Add snackbar for message that user is null
+      }
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -118,7 +121,8 @@ class _SignupState extends State<Signup> {
                               decoration: InputDecoration(
                                 hintText: "Full Name",
                                 hintStyle: const TextStyle(
-                                  fontSize: 24,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
                                   color: Color.fromRGBO(163, 136, 119, 1),
                                 ),
                                 filled: true,

@@ -1,12 +1,12 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:unimate/resources/authentication.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:url_launcher/link.dart';
+
+import '../resources/authentication.dart';
 
 class rDrawer extends StatelessWidget {
   const rDrawer({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,8 @@ class rDrawer extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: const Color.fromRGBO(138, 94, 65, 1), width: 5),
+          border:
+              Border.all(color: const Color.fromRGBO(138, 94, 65, 1), width: 5),
         ),
         width: 205,
         height: 339,
@@ -26,74 +27,52 @@ class rDrawer extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                  Text(FirebaseAuth.instance.currentUser!.displayName.toString(),
-                   style: const TextStyle(
-                     fontSize: 20,
-                     fontWeight: FontWeight.bold,
-                     color: Colors.black,
-                   ),
-                   textAlign: TextAlign.center,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                Text(
+                  FirebaseAuth.instance.currentUser!.displayName.toString(),
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
-                const SizedBox(height: 4,),
-                 Text(FirebaseAuth.instance.currentUser!.email.toString(),
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.black
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                   maxLines: 1,
-                   overflow: TextOverflow.ellipsis,
+                const SizedBox(
+                  height: 4,
                 ),
-                const SizedBox(height: 10,),
-                const Divider(thickness: 3,),
-                const SizedBox(height: 15,),
+                Text(
+                  FirebaseAuth.instance.currentUser!.email.toString(),
+                  style: const TextStyle(fontSize: 14, color: Colors.black),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Divider(
+                  thickness: 3,
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     InkWell(
-                      onTap: (){
-
-                        final snack = SnackBar(
-                          elevation: 0,
-                          behavior: SnackBarBehavior.floating,
-                          backgroundColor: Colors.transparent,
-                          content: AwesomeSnackbarContent(
-                          title: 'Coming Soon',
-                          message: 'This Service will be available Shortly.\nSorry for the inconvenience',
-                          contentType: ContentType.warning,
-
-                        ),);
-                        Scaffold.of(context).closeEndDrawer();
-                        ScaffoldMessenger.of(context)
-                        ..hideCurrentSnackBar()
-                        ..showSnackBar(snack);
-                      },
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(width: 10),
-                          Icon(Icons.file_download, size: 25,),
-                          SizedBox(width: 10),
-                          Text("Download", style: TextStyle(fontSize: 20),)
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 15,),
-                    InkWell(
-                      onTap: (){
-
+                      onTap: () {
                         final snack = SnackBar(
                           elevation: 0,
                           behavior: SnackBarBehavior.floating,
                           backgroundColor: Colors.transparent,
                           content: AwesomeSnackbarContent(
                             title: 'Coming Soon',
-                            message: 'This Service will be available Shortly.\nSorry for the inconvenience',
+                            message:
+                                'This Service will be available Shortly.\nSorry for the inconvenience',
                             contentType: ContentType.warning,
-
-                          ),);
+                          ),
+                        );
                         Scaffold.of(context).closeEndDrawer();
                         ScaffoldMessenger.of(context)
                           ..hideCurrentSnackBar()
@@ -103,26 +82,34 @@ class rDrawer extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(width: 10),
-                          Icon(Icons.settings, size: 25,),
+                          Icon(
+                            Icons.file_download,
+                            size: 25,
+                          ),
                           SizedBox(width: 10),
-                          Text("Settings", style: TextStyle(fontSize: 20),)
+                          Text(
+                            "Download",
+                            style: TextStyle(fontSize: 20),
+                          )
                         ],
                       ),
                     ),
-                    const SizedBox(height: 15,),
+                    const SizedBox(
+                      height: 15,
+                    ),
                     InkWell(
-                      onTap: (){
-
+                      onTap: () {
                         final snack = SnackBar(
                           elevation: 0,
                           behavior: SnackBarBehavior.floating,
                           backgroundColor: Colors.transparent,
                           content: AwesomeSnackbarContent(
                             title: 'Coming Soon',
-                            message: 'This Service will be available Shortly.\nSorry for the inconvenience',
+                            message:
+                                'This Service will be available Shortly.\nSorry for the inconvenience',
                             contentType: ContentType.warning,
-
-                          ),);
+                          ),
+                        );
                         Scaffold.of(context).closeEndDrawer();
                         ScaffoldMessenger.of(context)
                           ..hideCurrentSnackBar()
@@ -132,41 +119,101 @@ class rDrawer extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(width: 10),
-                          Icon(Icons.help_outline_rounded, size: 25,),
+                          Icon(
+                            Icons.settings,
+                            size: 25,
+                          ),
                           SizedBox(width: 10),
-                          Text("Help/Support", style: TextStyle(fontSize: 20),)
+                          Text(
+                            "Settings",
+                            style: TextStyle(fontSize: 20),
+                          )
                         ],
                       ),
                     ),
-                    const SizedBox(height: 15,),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        final snack = SnackBar(
+                          elevation: 0,
+                          behavior: SnackBarBehavior.floating,
+                          backgroundColor: Colors.transparent,
+                          content: AwesomeSnackbarContent(
+                            title: 'Coming Soon',
+                            message:
+                                'This Service will be available Shortly.\nSorry for the inconvenience',
+                            contentType: ContentType.warning,
+                          ),
+                        );
+                        Scaffold.of(context).closeEndDrawer();
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(snack);
+                      },
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(width: 10),
+                          Icon(
+                            Icons.help_outline_rounded,
+                            size: 25,
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            "Help/Support",
+                            style: TextStyle(fontSize: 20),
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
                     Link(
                       target: LinkTarget.self,
-                      uri: Uri.parse("https://www.termsfeed.com/live/f355bbee-79ee-4228-b5c0-9ec75a890ed6"),
-                      builder: (BuildContext context, followLink)=> InkWell(
+                      uri: Uri.parse(
+                          "https://www.termsfeed.com/live/f355bbee-79ee-4228-b5c0-9ec75a890ed6"),
+                      builder: (BuildContext context, followLink) => InkWell(
                         onTap: followLink,
                         child: const Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             SizedBox(width: 10),
-                            Icon(Icons.privacy_tip_outlined, size: 25,),
+                            Icon(
+                              Icons.privacy_tip_outlined,
+                              size: 25,
+                            ),
                             SizedBox(width: 10),
-                            Text("Privacy Policy", style: TextStyle(fontSize: 20),)
+                            Text(
+                              "Privacy Policy",
+                              style: TextStyle(fontSize: 20),
+                            )
                           ],
                         ),
                       ),
                     ),
-                    const SizedBox(height: 15,),
+                    const SizedBox(
+                      height: 15,
+                    ),
                     InkWell(
-                      onTap: ()async{
+                      onTap: () async {
                         await logOut(context);
                       },
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(width: 10),
-                          Icon(Icons.logout, size: 25,),
+                          Icon(
+                            Icons.logout,
+                            size: 25,
+                          ),
                           SizedBox(width: 10),
-                          Text("Logout", style: TextStyle(fontSize: 20),)
+                          Text(
+                            "Logout",
+                            style: TextStyle(fontSize: 20),
+                          )
                         ],
                       ),
                     ),
@@ -180,4 +227,3 @@ class rDrawer extends StatelessWidget {
     );
   }
 }
-
