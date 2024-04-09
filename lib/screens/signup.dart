@@ -119,8 +119,8 @@ class _SignupState extends State<Signup> {
                               decoration: InputDecoration(
                                 hintText: "Full Name",
                                 hintStyle: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
                                   color: Color.fromRGBO(163, 136, 119, 1),
                                 ),
                                 filled: true,
