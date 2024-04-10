@@ -18,15 +18,6 @@ class _LoginButtonScreen extends State<LoginButton> {
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => Homepage(),
     ));
-    // if (res == true) {
-    //   print('user is new');
-    //   Navigator.of(context)
-    //       .push(MaterialPageRoute(builder: (context) => const Signup()));
-    // } else {
-    //   print('user is not new');
-    //   Navigator.of(context)
-    //       .push(MaterialPageRoute(builder: (context) => const Homepage()));
-    // }
   }
 
   @override
