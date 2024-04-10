@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unimate/resources/authentication.dart';
 import 'package:unimate/screens/home_screen.dart';
-import 'package:unimate/screens/signup.dart';
 
 class LoginButton extends StatefulWidget {
   const LoginButton({super.key});
