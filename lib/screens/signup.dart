@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:unimate/screens/home_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -86,8 +87,13 @@ class _SignupState extends State<Signup> {
       future: getInstitutes(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return SafeArea(
+            child: Scaffold(
+              body: Center(
+                child: Lottie.asset("assests/animation/loading.json",
+                    width: 300, height: 300),
+              ),
+            ),
           );
         } else {
           return SafeArea(

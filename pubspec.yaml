@@ -46,6 +46,10 @@ dependencies:
   awesome_snackbar_content: ^0.1.1
   flutter_launcher_icons: ^0.13.1
   url_launcher: ^6.2.5
+  share_plus: ^8.0.3
+  flutter_rating_bar: ^4.0.1
+  rating_dialog: ^2.0.4
+  store_redirect: ^2.0.2
 
 dev_dependencies:
   flutter_launcher_icons: "^0.13.1"
@@ -75,6 +79,7 @@ flutter:
      - assests/images/google_logo_color.png
      - assests/images/mainscreen_logo.png
      - assests/images/pdf_image.png
+     - assests/icon/icon.png
      - assests/animation/
 
 
