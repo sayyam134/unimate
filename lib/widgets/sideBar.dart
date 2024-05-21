@@ -23,12 +23,13 @@ class rDrawer extends StatelessWidget {
               Border.all(color: const Color.fromRGBO(138, 94, 65, 1), width: 5),
         ),
         width: (MediaQuery.of(context).size.width*0.6),
-        height: (MediaQuery.of(context).size.height*0.532),
+        height: (MediaQuery.of(context).size.height*0.55),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
                   FirebaseAuth.instance.currentUser!.displayName.toString(),
@@ -57,7 +58,7 @@ class rDrawer extends StatelessWidget {
                   thickness: 3,
                 ),
                 const SizedBox(
-                  height: 15,
+                  height: 10,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
